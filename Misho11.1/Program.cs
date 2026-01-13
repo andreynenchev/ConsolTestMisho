@@ -9,13 +9,88 @@ namespace Misho11._1
 {
     class Program
     {
+        public static bool[] PrimeListBool { get; set; }
+        public static List<int> PrimeList { get; set; }
         static void Main(string[] args)
         {
             // Task1();
 
 
-            SumofOddSquares();
+            //SumofOddSquares();
 
+            //Multiplesof3or5();
+            CreatePrimeList();
+
+            LargestPrimeFactor();
+        }
+
+        private static void CreatePrimeList()
+        {
+            Console.WriteLine($"\t(start)");
+            var sw = new Stopwatch();
+            sw.Start();
+            int length = 10000000;
+            PrimeListBool = new bool[length];
+            PrimeList = new List<int>(10000000);
+            for (int i = 1; i < length; i++)
+            {
+                PrimeListBool[i] = true;
+            }
+            Console.WriteLine($"\t({sw.Elapsed.TotalMilliseconds} ms)");
+            for (int i = 2; i < length; i++)
+            {
+                if (PrimeListBool[i])
+                {   
+                    PrimeList.Add(i);
+                    for (int j = i + i; j < length; j += i)
+                    {
+                        PrimeListBool[j] = false;
+                    }
+                }
+            }
+            sw.Stop();
+            Console.WriteLine($"\t({sw.Elapsed.TotalMilliseconds} ms)");
+
+            for (int i = PrimeList.Count - 100; i < PrimeList.Count; i++)
+            {
+                Console.WriteLine($"{i} : {PrimeList[i]}");
+            }
+            Console.ReadLine();
+        }
+
+
+        //Largest Prime Factor
+        private static void LargestPrimeFactor()
+        {
+            
+            long number = 600851475143;
+            int maxprime = 1;
+            int i = 1;
+            while (i<1000000)
+            {
+                i++;
+                if (PrimeListBool[i] && number % i==0)
+                {
+                    Console.WriteLine($"{number} / {i} = {number / i}");
+                    maxprime = i;
+                }
+            }
+            Console.WriteLine($"{maxprime}");
+            Console.ReadLine();
+        }
+
+        private static void Multiplesof3or5()
+        {
+            int SumofMultiples = 0;
+            for (int i = 0; i < 1000; i++)
+            {
+                if (i % 3 == 0 || i % 5 == 0)
+                {
+                    SumofMultiples += i;
+                }
+            }
+            Console.WriteLine($"{SumofMultiples}");
+            Console.ReadLine();
         }
 
         private static void SumofOddSquares()
