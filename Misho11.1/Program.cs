@@ -21,7 +21,23 @@ namespace Misho11._1
             //Multiplesof3or5();
             CreatePrimeList();
 
-            LargestPrimeFactor();
+            //LargestPrimeFactor();
+        }
+
+        private static bool IsPalindrome(int num)
+        {
+            if (num < 0) return false;
+            if(num<10) return true;
+            if(num % 10 == 0) return false;
+            int reversed = 0;
+            int original = num;
+            while (num > 0)
+            {
+                int digit = num % 10;
+                reversed = reversed * 10 + digit;
+                num /= 10;
+            }
+            return original == reversed;
         }
 
         private static void CreatePrimeList()
@@ -36,7 +52,7 @@ namespace Misho11._1
             {
                 PrimeListBool[i] = true;
             }
-            Console.WriteLine($"\t({sw.Elapsed.TotalMilliseconds} ms)");
+            //Console.WriteLine($"\t({sw.Elapsed.TotalMilliseconds} ms)");
             for (int i = 2; i < length; i++)
             {
                 if (PrimeListBool[i])
@@ -49,13 +65,16 @@ namespace Misho11._1
                 }
             }
             sw.Stop();
-            Console.WriteLine($"\t({sw.Elapsed.TotalMilliseconds} ms)");
+            //Console.WriteLine($"\t({sw.Elapsed.TotalMilliseconds} ms)");
 
-            for (int i = PrimeList.Count - 100; i < PrimeList.Count; i++)
+            for (int i = 0; i < PrimeList.Count; i++)
             {
-                Console.WriteLine($"{i} : {PrimeList[i]}");
+                if (IsPalindrome(PrimeList[i]))
+                {
+                    Console.WriteLine($"{PrimeList[i]}");
+                }
             }
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
 
